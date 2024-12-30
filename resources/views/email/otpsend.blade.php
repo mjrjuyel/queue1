@@ -11,10 +11,8 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-8 offset-2">
-              Email  To Admin
-              <span>New User Registered</span>
-               <h1>New User Name : {{$insert['name']}}</h1>
-               <h1>New User Email : {{$insert['email']}}</h1>
+                From Admin 
+              <span>Your OTP is {{ rand(1000,9999)}}</span>
             </div>
         </div>
     </div>

@@ -11,9 +11,9 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-8 offset-2">
-              <span>SuccessFully You have Registered</span>
-               <h1> Name : {{$insert['name']}}</h1>
-               <h1> Name : {{$insert['email']}}</h1>
+              <span>SuccessFully You have Registered For This Website</span>
+               <h1>My Name : {{$insert['name']}}</h1>
+               <h1>My email : {{$insert['email']}}</h1>
             </div>
         </div>
     </div>
