@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SocialLoginController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,8 +21,11 @@ Route::middleware('auth')->group(function (){
 
 Route::get('/add',[UserController::class,'add'])->name('add');
 Route::post('/create',[UserController::class,'insert'])->name('create');
-
 Route::get('/sendotp',[UserController::class,'sendOTP'])->name('sendotp');
+
+// Social Login 
+Route::get('/auth/{provider}/redirect',[SocialLoginController::class,'redirect']);
+Route::get('/auth/{provider}/callback',[SocialLoginController::class,'callBack']);
 
 
 
