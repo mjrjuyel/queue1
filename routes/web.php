@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SocialLoginController;
+use App\Http\Controllers\Spatie\RoleController;
+use App\Http\Controllers\Spatie\PermissionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,6 +20,14 @@ Route::middleware('auth')->group(function (){
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Role Permission Route
+
+// Permisioni Route
+Route::resource('permision',PermissionController::class);
+
+Route::get('role/add',[RoleController::class,'add'])->name('role.add');
+Route::post('role/insert',[RoleController::class,'insert'])->name('role.insert');
 
 Route::get('/add',[UserController::class,'add'])->name('add');
 Route::post('/create',[UserController::class,'insert'])->name('create');
