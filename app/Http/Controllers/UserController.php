@@ -2,20 +2,55 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Mail\SendEmailRegister;
-use App\Mail\SendEmailAdmin;
-use App\Jobs\SendRegisterEmail;
-use App\Jobs\sendOtpJob;
+
+use Carbon\Carbon;
 use App\Models\User;
+use App\Jobs\sendOtpJob;
 use App\Models\TestModel;
+use App\Mail\SendEmailAdmin;
+use Illuminate\Http\Request;
+use App\Jobs\SendRegisterEmail;
+use App\Mail\SendEmailRegister;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 use Session;
 
 class UserController extends Controller
 {
-    public function add(){
-        return view('user.add');
+    public function index(){
+        $users = User::all();
+        return view('role-permission.user.index',compact('users'));
+    }   
+    
+    public function create(){
+        $roles = Role::all();
+        return view('role-permission.user.add',compact('roles'));
     }
+
+    public function store(Request $request){
+        $request->validate([
+            'name'=>'required'
+        ]);
+        // return $request->all();
+        $insert=User::create([
+            'name'=>$request['name'],
+            'email'=>$request->email,
+            'password'=>Hash::make($request->password),
+            'create_at'=>Carbon::now(),
+        ]);
+
+        $insert->syncRoles($request->role,1);
+
+        return redirect()->back()->with('success','User Created Succesfully');
+    } 
+
+
+
+
+
+
+
+
 
     public function insert(Request $request){
 
