@@ -39,7 +39,7 @@ class UserController extends Controller
             'create_at'=>Carbon::now(),
         ]);
 
-        $insert->syncRoles($request->role,1);
+        $insert->syncRoles($request->role);
 
         return redirect()->back()->with('success','User Created Succesfully');
     } 
@@ -70,7 +70,7 @@ class UserController extends Controller
         
         if($insert){
             // session()->flash('success');
-            Session::flash('success','Registration Succussfully completed');
+            session()->flash('success','Registration Succussfully completed');
             return redirect()->back();
         }
     }
@@ -79,7 +79,7 @@ class UserController extends Controller
         // $otp = rand(1000,9999);
         \dispatch(new sendOtpJob())->onQueue('high');
 
-        Session::flash('success','Otp Send Successfully');
+        session()->flash('success','Otp Send Successfully');
         return redirect()->back();
     }
 }
